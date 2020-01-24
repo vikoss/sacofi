@@ -23,7 +23,8 @@
     </header>
 
     <main class="py-4">
-            <h1>Sacofi</h1>
+        <h1>Sacofi</h1>
+        
         @yield('content')
     </main>
 
