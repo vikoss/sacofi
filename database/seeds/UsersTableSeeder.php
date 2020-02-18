@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
+use App\Role;
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,15 +14,109 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $admin = User::create([
             'name' => 'admin',
-            'email' => 'admin@sacofi.com',
+            'first_surname' => 'admin@sacofi.com',
+            'second_surname' => 'admin@sacofi.com',
+            'rfc' => 'rfc',
+            'address_street_number' => 'address_street_number',
+            'address_streat' => 'address_streat',
+            'address_colony' => 'address_colony',
+            'address_town' => 'address_town',
+            'address_cp' => 'address_cp',
+            'phone_number' => 'phone_number',
+            'activity' => 'activity',
+            'birthday' => 'birthday',
             'password' => Hash::make('secret'),
+            'email' => 'admin@sacofi.com',
         ]);
-        DB::table('users')->insert([
+       $admin->roles()->attach(Role::where('name', 'admin')->first());
+
+        $client = User::create([
             'name' => 'client01',
+            'first_surname' => 'first_surname',
+            'second_surname' => 'second_surname',
+            'rfc' => 'rfc',
+            'address_street_number' => 'address_street_number',
+            'address_streat' => 'address_streat',
+            'address_colony' => 'address_colony',
+            'address_town' => 'address_town',
+            'address_cp' => 'address_cp',
+            'phone_number' => 'phone_number',
+            'activity' => 'activity',
+            'birthday' => 'birthday',
             'email' => 'client01@sacofi.com',
             'password' => Hash::make('secret'),
         ]);
+        $client->roles()->attach(Role::where('name', 'client')->first());
+
+        $accountant = User::create([
+            'name' => 'accountant01',
+            'first_surname' => 'first_surname',
+            'second_surname' => 'second_surname',
+            'rfc' => 'rfc',
+            'address_street_number' => 'address_street_number',
+            'address_streat' => 'address_streat',
+            'address_colony' => 'address_colony',
+            'address_town' => 'address_town',
+            'address_cp' => 'address_cp',
+            'phone_number' => 'phone_number',
+            'activity' => 'activity',
+            'birthday' => 'birthday',
+            'email' => 'accountant01@sacofi.com',
+            'password' => Hash::make('secret'),
+        ]);
+        $accountant->roles()->attach(Role::where('name', 'accountant')->first());
+
+        /*DB::table('users')->insert([
+            'name' => 'admin',
+            'first_surname' => 'admin@sacofi.com',
+            'second_surname' => 'admin@sacofi.com',
+            'rfc' => 'rfc',
+            'address_street_number' => 'address_street_number',
+            'address_streat' => 'address_streat',
+            'address_colony' => 'address_colony',
+            'address_town' => 'address_town',
+            'address_cp' => 'address_cp',
+            'phone_number' => 'phone_number',
+            'activity' => 'activity',
+            'birthday' => 'birthday',
+            'password' => Hash::make('secret'),
+            'email' => 'admin@sacofi.com',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'client01',
+            'first_surname' => 'first_surname',
+            'second_surname' => 'second_surname',
+            'rfc' => 'rfc',
+            'address_street_number' => 'address_street_number',
+            'address_streat' => 'address_streat',
+            'address_colony' => 'address_colony',
+            'address_town' => 'address_town',
+            'address_cp' => 'address_cp',
+            'phone_number' => 'phone_number',
+            'activity' => 'activity',
+            'birthday' => 'birthday',
+            'email' => 'client01@sacofi.com',
+            'password' => Hash::make('secret'),
+        ]);
+        
+        DB::table('users')->insert([
+            'name' => 'accountant01',
+            'first_surname' => 'first_surname',
+            'second_surname' => 'second_surname',
+            'rfc' => 'rfc',
+            'address_street_number' => 'address_street_number',
+            'address_streat' => 'address_streat',
+            'address_colony' => 'address_colony',
+            'address_town' => 'address_town',
+            'address_cp' => 'address_cp',
+            'phone_number' => 'phone_number',
+            'activity' => 'activity',
+            'birthday' => 'birthday',
+            'email' => 'accountant01@sacofi.com',
+            'password' => Hash::make('secret'),
+        ]);*/
     }
 }
