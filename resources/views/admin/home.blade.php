@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    Hola admin
+    <header>
+    
+    </header>
+
+    <section id="app">
+        <a href="{{ route('admin.create') }}"> Agregar usuarios </a>
+        <a> Eliminar usuario </a>
+        <a> Modificar usuario </a>
+
+    </section>
 </body>
 </html>
