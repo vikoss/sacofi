@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <header>
+@extends('layouts.app')
+
+@section('main')
     
-    </header>
+    <a href="{{ route('admin.create') }}"> Agregar usuario </a>
+    <a> Eliminar usuario </a>
+    <a> Modificar usuario </a>
 
-    <section id="app">
-        <a href="{{ route('admin.create') }}"> Agregar usuarios </a>
-        <a> Eliminar usuario </a>
-        <a> Modificar usuario </a>
-
-    </section>
-</body>
-</html>
+@endsection

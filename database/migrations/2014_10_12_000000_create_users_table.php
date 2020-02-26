@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('second_surname');
             $table->string('rfc');
             $table->string('address_street_number');
-            $table->string('address_streat');
+            $table->string('address_street');
             $table->string('address_colony');
             $table->string('address_town');
             $table->string('address_cp');

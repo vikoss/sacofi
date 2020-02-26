@@ -17,18 +17,29 @@
     <title>Sacofi</title>
 </head>
 <body>
-    
-    <header>
-        <a href="{{ route('login') }}">Entrar</a>
-    </header>
+    <section id="app">
+        <header>
+            <section>
+                logo
+            </section>
+            <section>
+                Sacofi
+            </section>
+            <section>
+                Nombre usuario
+            </section>
+        </header>
+        <main class="container">
+            @yield('main')
+        </main>
+        <footer>
+            <section>
 
-    <main class="py-4">
-        <h1>Sacofi</h1>
-        
-        @yield('content')
-    </main>
+            </section>
+            <section>
 
-
-    
+            </section>
+        </footer>
+    </section>
 </body>
 </html>
