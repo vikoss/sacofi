@@ -11368,6 +11368,8 @@ a.text-dark:focus {
 #app header {
   grid-area: header;
   background-color: #d1d7f1;
+  display: -webkit-box;
+  display: flex;
 }
 
 #app main {

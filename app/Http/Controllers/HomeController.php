@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PDF;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('clients.home');
+    }
+
+    public function viewAccountant()
+    {
+        return view('accountant.home');
+    }
+
+    public function pdf(Request $request)
+    {
+        $pdf = PDF::loadHTML('<h1>Test</h1>');
+        return $pdf->stream();
+    }
+
+    public function uploadPDF(Request $request)
+    {
+        return $request->file('pdf')->store('myfile', 's3');
     }
 }

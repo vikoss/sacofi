@@ -53,7 +53,7 @@
             <input type="text" class="form-control form-control-sm" id="address_street" name="address_street">
     
             <label for="address_streat_number"> Numero : </label>
-            <input type="text" class="form-control form-control-sm" id="address_street_number" name="address_streat_number">
+            <input type="text" class="form-control form-control-sm" id="address_street_number" name="address_street_number">
     
             <label for="address_colony"> Colonia : </label>
             <input type="text" class="form-control form-control-sm" id="address_colony" name="address_colony">

@@ -17,6 +17,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//  Clientes
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+//  Contadores
+Route::get('/accountant', 'HomeController@viewAccountant')->name('accountant');
+
+
+//  administrador
 Route::resource('admin', 'AdminController');
+
+// PDF
+
+Route::get('/pdf', 'HomeController@pdf')->name('generate.pdf');
+
+Route::post('uploadPDF', 'HomeController@uploadPDF')->name('uploadPDF');

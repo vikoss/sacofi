@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'second_surname' => 'admin@sacofi.com',
             'rfc' => 'rfc',
             'address_street_number' => 'address_street_number',
-            'address_streat' => 'address_street',
+            'address_street' => 'address_street',
             'address_colony' => 'address_colony',
             'address_town' => 'address_town',
             'address_cp' => 'address_cp',
