@@ -11370,6 +11370,8 @@ a.text-dark:focus {
   background-color: #d1d7f1;
   display: -webkit-box;
   display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
 }
 
 #app main {

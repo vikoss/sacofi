@@ -33,3 +33,8 @@ Route::resource('admin', 'AdminController');
 Route::get('/pdf', 'HomeController@pdf')->name('generate.pdf');
 
 Route::post('uploadPDF', 'HomeController@uploadPDF')->name('uploadPDF');
+
+
+// SMS
+
+Route::post('sendSMS', 'HomeController@sendSMS')->name('send');

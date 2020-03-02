@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Twilio\Rest\Client;
 use PDF;
 
 class HomeController extends Controller
@@ -41,5 +42,17 @@ class HomeController extends Controller
     public function uploadPDF(Request $request)
     {
         return $request->file('pdf')->store('myfile', 's3');
+    }
+
+    public function sendSMS(Request $request)
+    {
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_number = getenv("TWILIO_NUMBER");
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create($request->recipient, 
+                ['from' => $twilio_number, 'body' => $request->message] );
+
+        return "sucessful";
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Role;
 
 class AdminController extends Controller
 {
@@ -11,10 +13,21 @@ class AdminController extends Controller
     public function index()
     {   
         // regresar todos los usuarios y listarlos usando la paginacion
+        $users = User::all();
+
+        foreach ($users as $key => $user) {
+            if ($user->hasRole('client')) {
+                $user->type = 'client';
+            } else if ($user->hasRole('accountant')){
+                $user->type = 'accountant';
+            } else {
+                unset($users[$key]);
+            }
+        }
 
         
 
-        return view('admin.home', [ 'users' => User::all() ]);
+        return view('admin.index', ['users' => $users]);
     }
 
     public function create()
@@ -24,32 +37,35 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        /*
-        $table->string('name');
-        $table->string('first_surname');
-        $table->string('second_surname');
-        $table->string('rfc');
-        $table->string('address_street_number');
-        $table->string('address_street');
-        $table->string('address_colony');
-        $table->string('address_town');
-        $table->string('address_cp');
-        $table->string('phone_number');
-        $table->string('activity');
-        $table->string('birthday');
-        //$table->string('accountant_id');
-        //$table->foreign('accountant_id')->references('id')->on('accountant');
-        $table->string('email')->unique();
-        $table->timestamp('email_verified_at')->nullable();
-        $table->string('password');
-        $table->rememberToken();
-        $table->timestamps();
-        */
+        $user = new User;
 
+        $user->name                  = $request->name;
+        $user->first_surname         = $request->first_surname;
+        $user->second_surname        = $request->second_surname;
+        $user->rfc                   = $request->rfc;
+        $user->address_street_number = $request->address_street_number;
+        $user->address_street        = $request->address_street;
+        $user->address_colony        = $request->address_colony;
+        $user->address_town          = $request->address_town;
+        $user->address_cp            = $request->address_cp;
+        $user->phone_number          = $request->phone_number;
+        $user->activity              = $request->activity;
+        $user->birthday              = $request->birthday;
+        $user->email                 = $request->email;
+        $user->password              = Hash::make($request->password);
 
-        User::create($request->all());
+        $user->save();
+
+        if ($request->type_user == 'client') {
+            
+            $user->roles()->attach(Role::where('name', 'client')->first());
+
+        } else { // Validar tambien si es de tipo contador
+
+            $user->roles()->attach(Role::where('name', 'accountant')->first());
+        }
         
-        return 'stored';
+        return redirect()->route('admin.index');
     }
 
     public function show($id)
