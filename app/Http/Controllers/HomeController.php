@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Twilio\Rest\Client;
+use Twilio\Rest\Client as SMS;
+use Carbon\Carbon;
+use App\Report;
 use PDF;
 
 class HomeController extends Controller
@@ -41,7 +43,25 @@ class HomeController extends Controller
 
     public function uploadPDF(Request $request)
     {
-        return $request->file('pdf')->store('myfile', 's3');
+        $nameClient = 'juan/';
+        $year = Carbon::now()->format('Y').'/';
+        $month = Carbon::now()->format('m').'/';
+        
+        $urlBase = 'https://incidentes-pdf.s3.ca-central-1.amazonaws.com';
+        $urlFile = $request->file('pdf')->store($nameClient.$year.$month, 's3');
+
+        $url = $urlBase.$urlFile;
+        
+        $report = new Report;
+
+        $report->name           = 'ISR';//$request->name;
+        $report->description    = 'Se subio con retardo de dos dias';$request->description;
+        $report->url            = $url;
+        $report->user_id        = 2;
+
+        $report->save();
+        
+        return "Succesful";
     }
 
     public function sendSMS(Request $request)
@@ -49,7 +69,7 @@ class HomeController extends Controller
         $account_sid = getenv("TWILIO_SID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
         $twilio_number = getenv("TWILIO_NUMBER");
-        $client = new Client($account_sid, $auth_token);
+        $client = new SMS($account_sid, $auth_token);
         $client->messages->create($request->recipient, 
                 ['from' => $twilio_number, 'body' => $request->message] );
 

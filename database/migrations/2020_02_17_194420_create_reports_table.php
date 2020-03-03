@@ -19,7 +19,7 @@ class CreateReportsTable extends Migration
             $table->string('description');
             $table->string('url');
             $table->bigInteger('user_id');
-            //$table->foreign('accountant_id')->references('id')->on('accountant');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
