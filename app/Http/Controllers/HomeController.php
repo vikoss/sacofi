@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client as SMS;
 use Carbon\Carbon;
 use App\Report;
+use App\User;
 use PDF;
 
 class HomeController extends Controller
@@ -31,8 +33,18 @@ class HomeController extends Controller
     }
 
     public function viewAccountant()
+    {   
+        $clients = User::find(Auth::user()->id)->clients;
+
+        return view('accountant.home', ['clients' => $clients]);
+    }
+    public function showClient($id)
     {
-        return view('accountant.home');
+        $reports = User::find($id)->reports;
+        // Tomar en cuenta si se quiere obtener datos de el contador que subio sus reporte
+        // User::find(3)->accountant->name;
+        
+        return view('accountant.show', ['reports' => $reports]);
     }
 
     public function pdf(Request $request)

@@ -50,7 +50,7 @@ class LoginController extends Controller
         }
         if( auth()->user()->isAccountant() ){
 
-            return '/accountants';
+            return '/accountant';
         }
     }
 }

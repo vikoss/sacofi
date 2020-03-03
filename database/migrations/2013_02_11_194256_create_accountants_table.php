@@ -13,7 +13,7 @@ class CreateAccountantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accountants', function (Blueprint $table) {
+        /*Schema::create('accountants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('first_surname');
             $table->string('second_surname');
@@ -31,7 +31,7 @@ class CreateAccountantsTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**

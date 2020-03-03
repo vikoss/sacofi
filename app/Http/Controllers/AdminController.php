@@ -31,8 +31,20 @@ class AdminController extends Controller
     }
 
     public function create()
-    {
-        return view('admin.create');
+    {   
+        $users = User::select('id','name')->get();
+
+        foreach ($users as $key => $user) {
+            if ($user->isClient()) {
+                $user->type = 'client';
+            } else if($user->isAccountant()) {
+                $user->type = 'accountant';
+            } else {
+                unset($users[$key]);
+            }
+        }
+
+        return view('admin.create', ['users' => $users]);
     }
 
     public function store(Request $request)
@@ -53,6 +65,7 @@ class AdminController extends Controller
         $user->birthday              = $request->birthday;
         $user->email                 = $request->email;
         $user->password              = Hash::make($request->password);
+        $user->accountant_id         = isset($request->accountant_id) ? $request->accountant_id : null;
 
         $user->save();
 
