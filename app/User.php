@@ -97,4 +97,22 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    // Cuales son los reportes que tiene un cliente
+    public function reports()
+    {
+        return $this->hasMany('App\Report', 'client_id');
+    }
+
+    // Quienes son los clientes que tiene un contador
+    public function clients()
+    {
+        return $this->hasMany('App\User', 'accountant_id');
+    }
+
+    // Quien es el contador de un cliente
+    public function accountant()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

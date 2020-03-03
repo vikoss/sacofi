@@ -18,8 +18,8 @@ class CreateReportsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('url');
-            $table->bigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -19,12 +19,12 @@ class RoleTableSeeder extends Seeder
         
         $role = new Role();
         $role->name = 'client';
-        $role->description = 'Es un cliente';
+        $role->description = 'El cliente solo puede visualizar sus documentos';
         $role->save();
 
         $role = new Role();
         $role->name = 'accountant';
-        $role->description = 'Es un contador';
+        $role->description = 'Los contadores se encargan de subir los documentos';
         $role->save();
     }
 }

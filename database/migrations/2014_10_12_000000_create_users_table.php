@@ -27,13 +27,16 @@ class CreateUsersTable extends Migration
             $table->string('phone_number');
             $table->string('activity');
             $table->string('birthday');
-            //$table->string('accountant_id');
-            //$table->foreign('accountant_id')->references('id')->on('accountant');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->unsignedBigInteger('accountant_id')->nullable();
+        });
+
+        Schema::table('users', function(Blueprint $table) {
+            $table->foreign('accountant_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

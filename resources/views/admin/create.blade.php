@@ -3,8 +3,17 @@
 @section('main')
 <!-- Seleccionamos el tipo de usuario y despues mostramos el formulario -->
 <a href="{{ route('admin.index') }}" class="btn btn-outline-primary">Regresar</a>
+{{ $users }}
 
-<form action="{{ route('admin.store') }}" method="POST">
+
+<label for="type_user">Tipo de usuario:</label>
+<select v-model="typeUser" class="custom-select">
+    <option value="">Selecciona una opcion...</option>
+    <option value="client">Cliente</option>
+    <option value="accountant">Contador</option>
+</select>
+
+<form v-if="typeUser" action="{{ route('admin.store') }}" method="POST">
     @csrf
     <div class="row">
         <div class="col-sm">
@@ -30,12 +39,18 @@
         </div>
         <div class="col-sm">
 
-            <label for="type_user">Tipo de usuario:</label>
-            <select name="type_user" id="type_user" class="custom-select" required>
-                <option value="none" disabled selected hidden>Selecciona una opcion...</option>
-                <option value="client">Cliente</option>
-                <option value="accountant">Contador</option>
-            </select>
+            
+            <span v-show="typeUser == 'client'">
+                <label for="accountant_id">Seleciona el contador que le dara seguimiento:</label>
+                <select name="accountant_id" id="accountant_id" class="custom-select" required>
+                    <option value="none" disabled selected hidden>Contadores...</option>
+                    @foreach ($users as $user)
+                        @if ($user->type == 'accountant')
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endif    
+                    @endforeach
+                </select>
+            </span>
 
             <label for="rfc"> RFC: </label>
             <input type="text" class="form-control form-control-sm" id="rfc" name="rfc" required>
@@ -74,5 +89,7 @@
         </div>
     </div>
 </form>  
+
+
 
 @endsection

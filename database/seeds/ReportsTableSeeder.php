@@ -16,21 +16,21 @@ class ReportsTableSeeder extends Seeder
         $role->name = 'ISR';
         $role->url = '/storage';
         $role->description = 'Este pago es cada tres meses y sirve para comprobar';
-        $role->user_id = '2';
+        $role->client_id = 3;
         $role->save();
         
         $role = new Report();
         $role->name = 'ISR';
         $role->url = '/storage/file';
         $role->description = 'Este pago es cada tres meses y sirve para comprobar';
-        $role->user_id = '3';
+        $role->client_id = 3;
         $role->save();
 
         $role = new Report();
         $role->name = 'ISR';
         $role->url = '/storage/file';
         $role->description = 'Este pago es cada tres meses y sirve para comprobar';
-        $role->user_id = '3';
+        $role->client_id = 3;
         $role->save();
     }
 }
