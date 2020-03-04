@@ -32,6 +32,10 @@ const app = new Vue({
     data: {
         seeSelectTypeUser : true,
         seeForm  : false,
-        typeUser: ''
+        typeUser: '',
+        formUpload: false
+    },
+    methods: {
+        
     }
 });

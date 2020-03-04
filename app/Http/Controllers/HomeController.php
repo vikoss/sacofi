@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('clients.home');
+        return view('clients.home', ['reports' => User::find(Auth::user()->id)->reports]);
     }
 
     public function viewAccountant()
@@ -40,11 +40,15 @@ class HomeController extends Controller
     }
     public function showClient($id)
     {
-        $reports = User::find($id)->reports;
+        $client = User::find($id);
+        $reports = $client->reports;
         // Tomar en cuenta si se quiere obtener datos de el contador que subio sus reporte
         // User::find(3)->accountant->name;
-        
-        return view('accountant.show', ['reports' => $reports]);
+        $payload = [
+                    'reports'   => $reports,
+                    'client'    => $client
+        ];
+        return view('accountant.show', $payload);
     }
 
     public function pdf(Request $request)
@@ -55,21 +59,24 @@ class HomeController extends Controller
 
     public function uploadPDF(Request $request)
     {
-        $nameClient = 'juan/';
+        $ClientName = $request->client_name.$request->client_first_surname.'/';
         $year = Carbon::now()->format('Y').'/';
-        $month = Carbon::now()->format('m').'/';
-        
-        $urlBase = 'https://incidentes-pdf.s3.ca-central-1.amazonaws.com';
-        $urlFile = $request->file('pdf')->store($nameClient.$year.$month, 's3');
+        $month = Carbon::now()->format('m');
 
-        $url = $urlBase.$urlFile;
+        $folderName = $ClientName.$year.$month;
+        
+        $urlFile = $request->file('pdf')->store($folderName, 's3');
+
+        $urlBase = getenv("AWS_URL");
+        
+        $url = $urlBase.'/'.$urlFile;
         
         $report = new Report;
 
-        $report->name           = 'ISR';//$request->name;
-        $report->description    = 'Se subio con retardo de dos dias';$request->description;
+        $report->name           = $request->name;
+        $report->description    = $request->description;
         $report->url            = $url;
-        $report->user_id        = 2;
+        $report->client_id      = $request->client_id;
 
         $report->save();
         

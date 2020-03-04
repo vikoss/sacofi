@@ -32,7 +32,7 @@
     </table>
 
 
-    <form action="{{ route('send') }}" method="post">
+    <!--form action="{{ route('send') }}" method="post">
     @csrf
     <label for="message">Mesnage:</label>
     <input type="text" name="message">
@@ -41,6 +41,6 @@
     
     <input type="submit" value="Enviar">
 
-  </form>
+  </form-->
 
 @endsection
