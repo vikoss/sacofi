@@ -16,8 +16,8 @@ class UsersTableSeeder extends Seeder
     {
         $admin = User::create([
             'name' => 'admin',
-            'first_surname' => 'admin@sacofi.com',
-            'second_surname' => 'admin@sacofi.com',
+            'first_surname' => 'apellido1',
+            'second_surname' => 'apellido2',
             'rfc' => 'rfc',
             'address_street_number' => 'address_street_number',
             'address_street' => 'address_street',
@@ -34,37 +34,37 @@ class UsersTableSeeder extends Seeder
 
        
        $accountant = User::create([
-           'name' => 'Juan',
-           'first_surname' => 'Fernandez',
-           'second_surname' => 'Guerreo',
-           'rfc' => 'rfc',
+           'name' => 'Gilberto',
+           'first_surname' => 'Hernandez',
+           'second_surname' => 'Conde',
+           'rfc' => 'FGJ090890TG3T',
            'address_street_number' => '19',
            'address_street' => 'Circonio',
            'address_colony' => 'Ex-hacianda del Pedregal',
            'address_town' => 'Atizapan de zaragoza',
            'address_cp' => '56541',
            'phone_number' => '55-6525-8715',
-           'activity' => 'Solo es contador',
+           'activity' => 'Es contador',
            'birthday' => '1990-03-03',
-           'email' => 'juan@sacofi.com',
+           'email' => 'gilberto.conde@sacofi.com',
            'password' => Hash::make('secret'),
            ]);
            $accountant->roles()->attach(Role::where('name', 'accountant')->first());
            
            $client = User::create([
-               'name' => 'Sergio',
-               'first_surname' => 'Hernandez',
-               'second_surname' => 'Perez',
+               'name' => 'Victor Israel',
+               'first_surname' => 'Torrecillas',
+               'second_surname' => 'Garcia',
                'rfc' => 'HPS44FGX55L0P',
                'address_street_number' => '563',
                'address_street' => 'Jalisco',
                'address_colony' => 'Jacaranda',
                'address_town' => 'Atizapan de Zaragoza',
                'address_cp' => '54269',
-               'phone_number' => '55-6924-9832',
-               'activity' => 'En sus ratos libres el es Chofer de Uber',
+               'phone_number' => '56-1296-0583',
+               'activity' => 'Tiene una microempresa de pan.',
                'birthday' => '1990-04-13',
-               'email' => 'sergio@sacofi.com',
+               'email' => 'victor.torrecillas@sacofi.com',
                'password' => Hash::make('secret'),
                'accountant_id' => 2,
            ]);

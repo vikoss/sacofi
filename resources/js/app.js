@@ -30,12 +30,21 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
     data: {
-        seeSelectTypeUser : true,
+        seeSelect_u : true,
         seeForm  : false,
-        typeUser: '',
+        type_user: '',
         formUpload: false
     },
     methods: {
+
+        confirmDelete(){
+            let deleteUser = confirm('Estas seguro que quieres eliminarlo ?')
+            
+            if( deleteUser )
+                document.getElementById('destroy-form').submit();
+            else
+                alert('Usuario NO eliminado')
+        }
         
     }
 });

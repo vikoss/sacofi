@@ -22,22 +22,21 @@
             <section>
                 <img src="{{ asset('imagess/logo.png') }}"height="40px" width="40px" alt="Logo de sacofi">
             </section>
-            <section>
+            <section class="d-flex align-items-center">
                 @guest
-                    <h6>Sacofi</h6>
+                    <h5>Sacofi</h5>
                 @else
-                    <ul>
-                        <li>Plataforma</li>
-                        <li>Sacofi</li>
-                    </ul>
+                    <h5>Sacofi</h5>
                 @endif
             </section>
             <section>
                 @guest
 
                 @else
+                <ul class="navbar-nav mr-auto">
+
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle mr-3 text-dark" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
@@ -53,10 +52,11 @@
                             </form>
                         </div>
                     </li>
+                </ul>
                 @endguest
             </section>
         </header>
-        <main class="container">
+        <main class="container pt-3">
             @yield('main')
         </main>
         <footer>

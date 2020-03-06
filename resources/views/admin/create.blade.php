@@ -1,20 +1,26 @@
 @extends('layouts.app')
 
 @section('main')
-<!-- Seleccionamos el tipo de usuario y despues mostramos el formulario -->
-<a href="{{ route('admin.index') }}" class="btn btn-outline-primary">Regresar</a>
-{{ $users }}
 
 
-<label for="type_user">Tipo de usuario:</label>
-<select v-model="typeUser" class="custom-select">
-    <option value="">Selecciona una opcion...</option>
-    <option value="client">Cliente</option>
-    <option value="accountant">Contador</option>
-</select>
+<a href="{{ route('admin.index') }}" class="btn btn-outline-secondary">Regresar</a>
 
-<form v-if="typeUser" action="{{ route('admin.store') }}" method="POST">
+{{-- $users --}}
+
+<div class="row">
+    <div class="col-sm mt-3">
+        <label for="type_user">Tipo de usuario:</label>
+        <select v-model="type_user" class="custom-select" id="type_user">
+            <option value="">Selecciona una opcion...</option>
+            <option value="client">Cliente</option>
+            <option value="accountant">Contador</option>
+        </select>
+    </div>
+</div>
+
+<form v-if="type_user" action="{{ route('admin.store') }}" method="POST" class="mt-3">
     @csrf
+    <input type="hidden" name="type_user" :value="type_user">
     <div class="row">
         <div class="col-sm">
             
@@ -40,10 +46,10 @@
         <div class="col-sm">
 
             
-            <span v-show="typeUser == 'client'">
+            <span v-if="type_user == 'client'">
                 <label for="accountant_id">Seleciona el contador que le dara seguimiento:</label>
                 <select name="accountant_id" id="accountant_id" class="custom-select" required>
-                    <option value="none" disabled selected hidden>Contadores...</option>
+                    <option value="" >Contadores...</option>
                     @foreach ($users as $user)
                         @if ($user->type == 'accountant')
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -61,8 +67,10 @@
             <label for="password"> Contraseña : </label>
             <input type="password" class="form-control form-control-sm" id="password" name="password" required>
     
-            <label for="password_r"> Confirma contraseña : </label>
-            <input type="password" class="form-control form-control-sm" id="password_r" required>
+            <!--label for="password_r"> Confirma contraseña : </label>
+            <input type="password" class="form-control form-control-sm" id="password_r" -->
+            <label for="address_cp"> Codigo Postal : </label>
+            <input type="text" class="form-control form-control-sm" id="address_cp" name="address_cp" required>
 
         </div>
         <div class="col-sm">
@@ -79,13 +87,11 @@
             <label for="address_town"> Municipio : </label>
             <input type="text" class="form-control form-control-sm" id="address_town" name="address_town" required>
     
-            <label for="address_cp"> Codigo Postal : </label>
-            <input type="text" class="form-control form-control-sm" id="address_cp" name="address_cp" required>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm">
-            <button type="submit">Crear</button>
+        <div class="col-sm  mt-2 d-flex justify-content-end">
+            <button type="submit" class="btn btn-outline-primary">Enviar</button>
         </div>
     </div>
 </form>  
