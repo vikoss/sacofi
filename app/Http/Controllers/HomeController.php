@@ -79,8 +79,23 @@ class HomeController extends Controller
         $report->client_id      = $request->client_id;
 
         $report->save();
+
+        // Cliente 
+        $clientData = User::find($request->client_id);
+
+        // sendSMS(); Llamar mi funcion
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_number = getenv("TWILIO_NUMBER");
+        $client = new SMS($account_sid, $auth_token);
+        $client->messages->create('+52'.$clientData->phone_number, 
+                [   
+                    'from' => $twilio_number, 
+                    'body' => 'Hola '.$clientData->name.' le informamos que ya puede revisar su '.$request->name.' en nuestra pagina oficial https://sacofi.com. Atentamente el equipo de Sacofi.'
+                ] 
+        );
         
-        return "Succesful";
+        return redirect()->route('reports.show', $request->client_id);
     }
 
     public function sendSMS(Request $request)

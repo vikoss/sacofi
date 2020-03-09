@@ -8,7 +8,12 @@ use App\User;
 use App\Role;
 
 class AdminController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('isAdmin');
+    }
 
     public function index()
     {   
@@ -49,6 +54,12 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
+
+        /* 
+        * Validar campos desde aqui con $request->validate
+        * Y tambien a cada campo en el formulario agregar la propiedad value="{{ old('name_field') }}" para regresar el valor que tenia
+        */
+
         $user = new User;
 
         $user->name                  = $request->name;

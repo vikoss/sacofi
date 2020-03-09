@@ -27,7 +27,7 @@ Route::get('/accountant/client/{id}', 'HomeController@showClient')->name('report
 
 
 //  administrador
-Route::resource('admin', 'AdminController');
+//Route::resource('admin', 'AdminController');
 
 // PDF
 

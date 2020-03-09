@@ -2,7 +2,7 @@
 
 @section('main')
 
-<a href="{{ route('accountant') }}" class="btn btn-outline-primary">Regresar</a>
+<a href="{{ route('accountant') }}" class="btn btn-outline-secondary mb-3">Regresar</a>
 
 {{-- $reports }}
 {{ $client --}}
@@ -13,8 +13,7 @@
     <h5 class="mb-1">{{ $report->name }}</h5>
     <small>{{ $report->created_at }}</small>
     </div>
-    <p class="mb-1">{{ $report->description }}</p>
-    <small>Donec id elit non mi porta.</small>
+    <small>{{ $report->description }}</small>
 </a>
 </div>
 <!-- Modal -->
