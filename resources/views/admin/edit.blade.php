@@ -26,6 +26,24 @@
         </div>
         <div class="col-sm">
 
+            @if (App\User::find($user->id)->hasRole('client'))
+                
+                @php
+                    $users = App\User::all();
+                    $accountants = $users->filter(function($user){ 
+                        return $user->hasRole('accountant'); 
+                    }) 
+                @endphp
+            
+                <label for="accountant_id">Contador asignado:</label>
+                <select name="accountant_id" id="accountant_id" class="custom-select" required>
+                    <option value="{{ $user->accountant->name }}" >{{ $user->accountant->name }}</option>
+                    @foreach ($accountants as $accountant)
+                            <option value="{{ $accountant->id }}">{{ $accountant->name }}</option>
+                    @endforeach
+                </select>
+            @endif
+
             <label for="activity"> Actividad : </label>
             <input type="text" class="form-control form-control-sm" id="activity" name="activity" value="{{ $user->activity }}">
 

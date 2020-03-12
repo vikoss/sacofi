@@ -107,6 +107,7 @@ class AdminController extends Controller
 
     public function update(Request $request, $id)
     {
+        
         $user = User::findOrFail( $id );
 
         $user->name                  = $request->name;
@@ -122,6 +123,10 @@ class AdminController extends Controller
         $user->activity              = $request->activity;
         $user->birthday              = $request->birthday;
         $user->email                 = $request->email;
+
+        if ($user->hasRole('client')) {
+            $user->accountant_id = $request->accountant_id;
+        }
 
         $user->save();
 

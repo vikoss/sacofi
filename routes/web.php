@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //  Contadores
 Route::get('/accountant', 'HomeController@viewAccountant')->name('accountant');
 Route::get('/accountant/client/{id}', 'HomeController@showClient')->name('reports.show');
+Route::get('/accountant/client/{id}/report/create', 'HomeController@createReport')->name('report.create');
 
 
 //  administrador

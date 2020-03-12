@@ -51,6 +51,13 @@ class HomeController extends Controller
         return view('accountant.show', $payload);
     }
 
+    public function createReport($id)
+    {
+        $client = User::find($id);
+
+        return view('accountant.create', ['client' => $client]);
+    }
+
     public function pdf(Request $request)
     {
         $pdf = PDF::loadHTML('<h1>Test</h1>');
